@@ -13,7 +13,7 @@ class _PhoneFieldWidgetState extends State<PhoneFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
-      controller: widget.controller,
+      // controller: widget.controller,
       showCountryFlag: true,
       dropdownIcon: Icon(
         Icons.arrow_drop_down,
@@ -31,10 +31,12 @@ class _PhoneFieldWidgetState extends State<PhoneFieldWidget> {
           borderSide: BorderSide(width: 0, style: BorderStyle.none),
         ),
       ),
-      initialCountryCode: 'MM',
-      // onChanged: (text) => setState(() {
-      //   widget.controller.text = text.completeNumber;
-      // }),
+      initialCountryCode: 'MM', // Myanmar country code
+      onChanged: (phone) {
+        setState(() {
+          widget.controller.text = phone.completeNumber; // ✅ Stores full number
+        });
+      },
     );
   }
 }

@@ -1,9 +1,9 @@
-import 'package:drivers_app/screens/auth_screens/login_or_register.dart';
+import 'package:drivers_app/firebase_options.dart';
+import 'package:drivers_app/screens/splash_screens/splash_screen.dart';
 import 'package:drivers_app/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Delivers App',
+      title: 'Drivers App',
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: LoginOrRegister(),
+      home: SplashScreen(),
     );
   }
 }

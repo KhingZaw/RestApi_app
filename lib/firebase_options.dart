@@ -41,49 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyANxtCrpJWUJn1UQCoPMczopabx_Du0Ycs',
-    appId: '1:215240400915:web:83293736940179d67c5fe6',
-    messagingSenderId: '215240400915',
-    projectId: 'drivers-a58a4',
-    authDomain: 'drivers-a58a4.firebaseapp.com',
-    storageBucket: 'drivers-a58a4.firebasestorage.app',
-    measurementId: 'G-NQ9G0FQMRQ',
+    apiKey: 'AIzaSyBvslga13rw84Fhixpsey5OK_6M_1gfJeM',
+    appId: '1:864261407690:web:2f0021cee7224aaa8c0533',
+    messagingSenderId: '864261407690',
+    projectId: 'drivers-95828',
+    authDomain: 'drivers-95828.firebaseapp.com',
+    storageBucket: 'drivers-95828.firebasestorage.app',
+    measurementId: 'G-EC41WGYY73',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBmg3RR7MqzSrHQ1GgBcuobOYv_jDm0RVo',
-    appId: '1:215240400915:android:853537c9560cc04f7c5fe6',
-    messagingSenderId: '215240400915',
-    projectId: 'drivers-a58a4',
-    storageBucket: 'drivers-a58a4.firebasestorage.app',
+    apiKey: 'AIzaSyDkFlKIvVR7-hCXt3PJ-oIU5b_tedHZlUw',
+    appId: '1:864261407690:android:596620446f4b4e2a8c0533',
+    messagingSenderId: '864261407690',
+    projectId: 'drivers-95828',
+    storageBucket: 'drivers-95828.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAUxBeE0xN5oOKkWd0wsIV_qBEWYj0PuUM',
-    appId: '1:215240400915:ios:dbb1d58c68b916857c5fe6',
-    messagingSenderId: '215240400915',
-    projectId: 'drivers-a58a4',
-    storageBucket: 'drivers-a58a4.firebasestorage.app',
+    apiKey: 'AIzaSyDuIpoemVl14GlOwhhSoqhdybjpxK4BSFY',
+    appId: '1:864261407690:ios:af549e0a4a6e80e68c0533',
+    messagingSenderId: '864261407690',
+    projectId: 'drivers-95828',
+    storageBucket: 'drivers-95828.firebasestorage.app',
     iosBundleId: 'com.example.driversApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAUxBeE0xN5oOKkWd0wsIV_qBEWYj0PuUM',
-    appId: '1:215240400915:ios:dbb1d58c68b916857c5fe6',
-    messagingSenderId: '215240400915',
-    projectId: 'drivers-a58a4',
-    storageBucket: 'drivers-a58a4.firebasestorage.app',
+    apiKey: 'AIzaSyDuIpoemVl14GlOwhhSoqhdybjpxK4BSFY',
+    appId: '1:864261407690:ios:af549e0a4a6e80e68c0533',
+    messagingSenderId: '864261407690',
+    projectId: 'drivers-95828',
+    storageBucket: 'drivers-95828.firebasestorage.app',
     iosBundleId: 'com.example.driversApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyANxtCrpJWUJn1UQCoPMczopabx_Du0Ycs',
-    appId: '1:215240400915:web:4d3e1aebfec0a6f57c5fe6',
-    messagingSenderId: '215240400915',
-    projectId: 'drivers-a58a4',
-    authDomain: 'drivers-a58a4.firebaseapp.com',
-    storageBucket: 'drivers-a58a4.firebasestorage.app',
-    measurementId: 'G-DFQN04KH0S',
+    apiKey: 'AIzaSyBvslga13rw84Fhixpsey5OK_6M_1gfJeM',
+    appId: '1:864261407690:web:d760242c26b270f88c0533',
+    messagingSenderId: '864261407690',
+    projectId: 'drivers-95828',
+    authDomain: 'drivers-95828.firebaseapp.com',
+    storageBucket: 'drivers-95828.firebasestorage.app',
+    measurementId: 'G-CTMPYRXWZV',
   );
 
 }

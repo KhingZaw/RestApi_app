@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "215240400915",
-    "project_id": "drivers-a58a4",
-    "storage_bucket": "drivers-a58a4.firebasestorage.app"
+    "project_number": "864261407690",
+    "project_id": "drivers-95828",
+    "storage_bucket": "drivers-95828.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:215240400915:android:853537c9560cc04f7c5fe6",
+        "mobilesdk_app_id": "1:864261407690:android:596620446f4b4e2a8c0533",
         "android_client_info": {
           "package_name": "com.example.drivers_app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBmg3RR7MqzSrHQ1GgBcuobOYv_jDm0RVo"
+          "current_key": "AIzaSyDkFlKIvVR7-hCXt3PJ-oIU5b_tedHZlUw"
         }
       ],
       "services": {

@@ -9,5 +9,6 @@ ThemeData lightMode = ThemeData(
     inverseSurface: Colors.grey,
     tertiary: Colors.white,
     inversePrimary: Colors.grey.shade200,
+    onTertiary: Colors.black,
   ),
 );

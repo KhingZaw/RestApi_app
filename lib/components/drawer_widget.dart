@@ -1,13 +1,14 @@
 import 'package:drivers_app/components/drawer_tile_widget.dart';
 import 'package:drivers_app/screens/user_screens/home_screen.dart';
 import 'package:drivers_app/screens/user_screens/settings_screen.dart';
+import 'package:drivers_app/services/aut/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({super.key});
-
+  DrawerWidget({super.key});
+  final AuthService authService = AuthService();
   void logOut() async {
-    //await _userRepository.singOutUser();
+    await authService.singOutUser();
   }
 
   @override
@@ -19,7 +20,7 @@ class DrawerWidget extends StatelessWidget {
         children: [
           //app Logo
           Image.asset(
-            "images/city.jpg",
+            "assets/images/city.jpg",
           ),
 
           Padding(

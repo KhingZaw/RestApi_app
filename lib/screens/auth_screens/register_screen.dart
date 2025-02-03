@@ -1,10 +1,14 @@
 import 'package:drivers_app/components/phone_field_widget.dart';
 import 'package:drivers_app/components/text_form_widget.dart';
+import 'package:drivers_app/screens/user_screens/home_screen.dart';
+import 'package:drivers_app/services/aut/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
   final void Function()? onTap;
-  const RegisterScreen({super.key, this.onTap});
+  final bool forgetPassword;
+  const RegisterScreen({super.key, this.onTap, this.forgetPassword = false});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -18,8 +22,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController confirmController = TextEditingController();
 
+  final AuthService authService = AuthService();
 //declare a GlobalKey
-  // final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+  void _submit() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      await authService.registerUser(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+        nameController.text.trim(),
+        phoneController.text.trim(),
+        addressController.text.trim(),
+      );
+      setState(() {
+        isLoading = false;
+      });
+      Navigator.push(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder: (c) => HomeScreen(),
+        ),
+      );
+    } else {
+      setState(() {
+        isLoading = false;
+      });
+      Fluttertoast.showToast(msg: "Not all field are valid");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             Column(
               children: [
-                Image.asset("images/city.jpg"),
+                Image.asset("assets/images/city.jpg"),
                 SizedBox(
                   height: 20,
                 ),
@@ -51,6 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Form(
+                        key: _formKey,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,43 +168,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 minimumSize: Size(double.infinity, 50),
                               ),
-                              onPressed: () {},
-                              child: Text(
-                                "Register",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
+                              onPressed: _submit,
+                              child: isLoading
+                                  ? Center(child: CircularProgressIndicator())
+                                  : Text(
+                                      "Register",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
                             ),
                             SizedBox(
                               height: 25,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Have an account?",
-                                  style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                GestureDetector(
-                                  onTap: widget.onTap,
-                                  child: Text(
-                                    "Log In",
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary,
-                                        fontWeight: FontWeight.bold),
+                            widget.forgetPassword
+                                ? SizedBox()
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Have an account?",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      GestureDetector(
+                                        onTap: widget.onTap,
+                                        child: Text(
+                                          "Log In",
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
                           ],
                         ),
                       ),

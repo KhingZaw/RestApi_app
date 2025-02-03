@@ -1,48 +1,44 @@
 import 'package:drivers_app/components/text_form_widget.dart';
-import 'package:drivers_app/screens/auth_screens/forget_password.dart';
-import 'package:drivers_app/screens/user_screens/home_screen.dart';
+import 'package:drivers_app/screens/auth_screens/register_screen.dart';
 import 'package:drivers_app/services/aut/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginScreen extends StatefulWidget {
-  final void Function()? onTap;
-  const LoginScreen({super.key, this.onTap});
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgetPassword> createState() => _ForgetPasswordState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgetPasswordState extends State<ForgetPassword> {
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  final AuthService authService = AuthService();
   //declare a GlobalKey
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+
+  final AuthService authService = AuthService();
   void _submit() async {
     setState(() {
       isLoading = true;
     });
     if (_formKey.currentState!.validate()) {
-      await authService.login(emailController.text, passwordController.text);
+      final success =
+          await authService.resetPassword(email: emailController.text);
       setState(() {
         isLoading = false;
       });
-      await Fluttertoast.showToast(msg: "Successfully Login");
-      Navigator.push(
+      if (success) {
+        Fluttertoast.showToast(
+            msg:
+                "We have sent you an email to recover password, please check email");
         // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(
-          builder: (c) => HomeScreen(),
-        ),
-      );
+        Navigator.pop(context);
+      }
     } else {
       setState(() {
         isLoading = false;
       });
-      Fluttertoast.showToast(msg: "Not all field are valid");
     }
   }
 
@@ -63,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Well Come Back",
+                  "Forget Password",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                     fontSize: 25,
@@ -90,43 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               nameLength: 2,
                             ),
                             SizedBox(
-                              height: 10,
-                            ),
-                            TextFormWidget(
-                              hintText: 'Password',
-                              passwordSuffixIcon: true,
-                              passwordVisible: false,
-                              icon: Icons.password,
-                              controller: passwordController,
-                              limitingText: 50,
-                              length: 49,
-                              nameLength: 6,
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (c) => ForgetPassword(),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "Forget Password ?",
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .inverseSurface),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -144,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: isLoading
                                   ? Center(child: CircularProgressIndicator())
                                   : Text(
-                                      "Login",
+                                      "Send Reset Password",
                                       style: TextStyle(
                                         fontSize: 20,
                                       ),
@@ -167,7 +127,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   width: 5,
                                 ),
                                 GestureDetector(
-                                  onTap: widget.onTap,
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (c) =>
+                                          RegisterScreen(forgetPassword: true),
+                                    ),
+                                  ),
                                   child: Text(
                                     "Register",
                                     style: TextStyle(
@@ -184,9 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
