@@ -10,7 +10,7 @@ void main() async {
 
   //initial firebase
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform, // Ensure this is correct
   );
   runApp(MultiProvider(providers: [
     // theme provider

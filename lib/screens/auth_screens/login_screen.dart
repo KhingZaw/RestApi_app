@@ -25,24 +25,36 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoading = true;
     });
+
     if (_formKey.currentState!.validate()) {
-      await authService.login(emailController.text, passwordController.text);
-      setState(() {
-        isLoading = false;
-      });
-      await Fluttertoast.showToast(msg: "Successfully Login");
-      Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(
-          builder: (c) => HomeScreen(),
-        ),
-      );
+      try {
+        await authService.login(
+          emailController.text,
+          passwordController.text,
+        );
+        setState(() {
+          isLoading = false;
+        });
+
+        Fluttertoast.showToast(msg: "Successfully Logged In");
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (c) => HomeScreen(),
+          ),
+        );
+      } catch (e) {
+        setState(() {
+          isLoading = false;
+        });
+        Fluttertoast.showToast(msg: "Login failed: ${e.toString()}");
+      }
     } else {
       setState(() {
         isLoading = false;
       });
-      Fluttertoast.showToast(msg: "Not all field are valid");
+      Fluttertoast.showToast(msg: "Not all fields are valid");
     }
   }
 

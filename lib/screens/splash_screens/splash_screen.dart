@@ -15,24 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void startTime() {
     Timer(Duration(seconds: 3), () async {
-      Navigator.push(context, MaterialPageRoute(builder: (c) => AuthGate()));
-      // if (authService.getCurrentUser() != null) {
-      //   UserModel? user = await authService.getUser(); // ✅ Await user retrieval
-
-      //   if (user != null) {
-      //     // ✅ User exists, go to HomeScreen
-      //     Navigator.pushReplacement(
-      //         context, MaterialPageRoute(builder: (c) => HomeScreen()));
-      //   } else {
-      //     // ✅ If user is null, go to login
-      //     Navigator.pushReplacement(
-      //         context, MaterialPageRoute(builder: (c) => LoginOrRegister()));
-      //   }
-      // } else {
-      //   // ✅ If authService.currentUser is null, go to login
-      //   Navigator.pushReplacement(
-      //       context, MaterialPageRoute(builder: (c) => LoginOrRegister()));
-      // }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (c) => AuthGate(),
+        ),
+      );
     });
   }
 

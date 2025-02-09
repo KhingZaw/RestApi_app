@@ -47,58 +47,20 @@ class AuthService {
     }
   }
 
-  Future<UserCredential?> login(String email, String password) async {
+  Future<UserCredential> login(String email, String password) async {
     try {
       return await firebaseAuth.signInWithEmailAndPassword(
-          email: email.trim(), password: password.trim());
+          email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      String errorMessage;
-
-      switch (e.code) {
-        case 'user-not-found':
-          errorMessage = "No user found with this email.";
-          break;
-        case 'wrong-password':
-          errorMessage = "Incorrect password. Please try again.";
-          break;
-        case 'invalid-email':
-          errorMessage = "Invalid email format.";
-          break;
-        case 'user-disabled':
-          errorMessage = "This user has been disabled.";
-          break;
-        default:
-          errorMessage = "An unexpected error occurred. Please try again.";
-      }
-
-      Fluttertoast.showToast(msg: errorMessage);
-      return null; // Explicitly return null when login fails
-    } catch (e) {
-      Fluttertoast.showToast(msg: "An unknown error occurred: $e");
-      return null; // Ensure null is returned if an unknown error occurs
+      throw Exception(e.code);
     }
   }
 
-  // Future<UserModel?> getUser() async {
-  //   try {
-  //     DocumentSnapshot snap =
-  //         await firestore.collection("users").doc(getCurrentUser()!.uid).get();
-  //     if (snap.exists) {
-  //       currentUserModel = UserModel.fromSnapshot(snap);
-  //       return currentUserModel;
-  //     }
-  //     return null;
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
-
-  Future<void> singOutUser() async {
+  Future<void> signOutUser() async {
     try {
       await firebaseAuth.signOut();
     } catch (e) {
-      Fluttertoast.showToast(msg: "$e");
-      // Show an error message or handle the error accordingly
+      Fluttertoast.showToast(msg: "Logout error: $e");
     }
   }
 

@@ -12,15 +12,18 @@ class AuthGate extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
+          //  print("Auth State Changed: ${snapshot.data}"); // Debug print
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
-          // User is logged in
+
           if (snapshot.hasData) {
+            //print("User Logged In: ${snapshot.data?.email}");
             return const HomeScreen();
           }
 
-          // User is not logged in
+          //  print("No User Found - Redirecting to Login");
           return const LoginOrRegister();
         },
       ),
