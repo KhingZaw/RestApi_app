@@ -9,7 +9,7 @@ class ItemService {
   Future<List<ItemModel>> getAllItemData() async {
     List<ItemModel> allItems = [];
     try {
-      var response = await http.get(Uri.parse(baseUrl + "objects"));
+      var response = await http.get(Uri.parse("$baseUrl/objects"));
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         for (var item in data) {
@@ -24,7 +24,7 @@ class ItemService {
 
   /// Create a new item (POST Request)
   Future<ItemModel?> createItem(String name, int year, double price,
-      String cpuModel, String hardDiskSize) async {
+      String cpuModel, String hardDiskSize, String? color) async {
     try {
       var response = await http.post(
         Uri.parse("$baseUrl/objects"),
@@ -39,12 +39,42 @@ class ItemService {
           }
         }),
       );
-      print("response post:${response.body}");
+      // print("response post:${response.body}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         var responseData = jsonDecode(response.body);
         return ItemModel.fromJson(responseData); // Return the created item
       } else {
         throw Exception("Failed to create item: ${response.body}");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  // Update an existing item (PUT Request)
+  Future<ItemModel?> updateItem(String id, String name, int year, double price,
+      String cpuModel, String hardDiskSize, String color) async {
+    try {
+      var response = await http.put(
+        Uri.parse("$baseUrl/objects/$id"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "name": name,
+          "data": {
+            "year": year,
+            "price": price,
+            "CPU model": cpuModel,
+            "Hard disk size": hardDiskSize,
+            "color": color
+          }
+        }),
+      );
+      print("response put:${response.body}");
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var responseData = jsonDecode(response.body);
+        return ItemModel.fromJson(responseData); // Return the updated item
+      } else {
+        throw Exception("Failed to update item: ${response.body}");
       }
     } catch (e) {
       throw Exception(e.toString());

@@ -47,12 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _showCreateItemDialog(BuildContext context) {
+  void _showCreateItemDialog(BuildContext context,
+      {ItemModel? existingItem, bool isEdit = true}) {
     showDialog(
       context: context,
-      builder: (context) {
-        return CreateDialog();
-      },
+      builder: (context) => CreateDialog(isEdit: isEdit, item: existingItem),
     );
   }
 
@@ -77,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                _showCreateItemDialog(context);
+                _showCreateItemDialog(context, isEdit: false);
               },
               icon: Icon(Icons.add_circle_outline))
         ],
@@ -114,6 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                       child: ListTile(
+                        onTap: () => _showCreateItemDialog(context,
+                            existingItem: data[index]), // Pass the item
                         title: Text(
                           data[index].name,
                           style: TextStyle(
